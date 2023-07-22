@@ -7,14 +7,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Home({ products }) {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:1337/api/products");
+      const response = await axios.get("http://127.0.0.1:1337/api/products?populate=*");
       setData(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -37,7 +37,6 @@ export default function Home({ products }) {
           </div>
         </div>
         {/* headings end */}
-
         {data && <ProductList products={data} />}
         {/* {products?.data?.map((product) => (
           <ProductCard key={product?.id} data={product} />
