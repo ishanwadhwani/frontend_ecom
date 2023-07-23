@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 const ProductCard = ({ data: { attributes: p, id } }) => {
+    const imageUrl = p.thumbnail.data?.attributes?.url;
     return (
         <Link
             href={`/product/${p.slug}`}
@@ -11,10 +12,10 @@ const ProductCard = ({ data: { attributes: p, id } }) => {
             <Image
                 width={500}
                 height={500}
-                src={p.thumbnail.data.attributes.url}
+                src={imageUrl}
                 alt={p.name}
             />
-            <div className="p-4 text-black/[0.9]">
+            <div className="p-4 text-black/[0.9] ">
                 <h2 className="text-lg font-medium">{p.name}</h2>
                 <div className="flex items-center text-black/[0.5]">
                     <p className="mr-2 text-lg font-semibold">
@@ -23,7 +24,7 @@ const ProductCard = ({ data: { attributes: p, id } }) => {
 
                     {p.original_price && (
                         <>
-                            <p className="text-base  font-medium line-through">
+                            <p className="text-base font-medium line-through text-red-600">
                                 &#8377;{p.original_price}
                             </p>
                             {/* <p className="ml-auto text-base font-medium text-green-500">
